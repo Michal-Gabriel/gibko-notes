@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { saveAs } from 'file-saver';
 
 const STORAGE_KEY = 'gibko-notes-content';
-const THEME_KEY = 'gibko-notes-theme';
 const PLACEHOLDER = 'Start writing...';
 
 function getStoredValue(key, fallback = '') {
@@ -13,15 +12,6 @@ function getStoredValue(key, fallback = '') {
   }
 }
 
-function formatReadingTime(words) {
-  if (words === 0) {
-    return '0 min read';
-  }
-
-  const minutes = Math.max(1, Math.ceil(words / 200));
-  return `${minutes} min read`;
-}
-
 function getTextMetrics(text) {
   const trimmed = text.trim();
   const words = trimmed ? trimmed.split(/\s+/).length : 0;
@@ -29,13 +19,11 @@ function getTextMetrics(text) {
   return {
     words,
     characters: text.length,
-    readingTime: formatReadingTime(words),
   };
 }
 
 export default function App() {
   const [text, setText] = useState(() => getStoredValue(STORAGE_KEY));
-  const [theme, setTheme] = useState(() => getStoredValue(THEME_KEY, 'dark'));
   const [status, setStatus] = useState('');
   const [saveStatus, setSaveStatus] = useState(() => (getStoredValue(STORAGE_KEY) ? 'Saved locally' : ''));
   const editorRef = useRef(null);
@@ -74,15 +62,6 @@ export default function App() {
       }
     };
   }, [text]);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem(THEME_KEY, theme);
-    } catch {
-      // Ignore storage errors and still apply the theme locally.
-    }
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
 
   useEffect(
     () => () => {
@@ -256,7 +235,7 @@ export default function App() {
       <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col px-4 py-5 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
         <header className="rounded-[30px] border border-[var(--border)] bg-[var(--panel)] px-5 py-6 shadow-[0_24px_80px_rgba(15,23,42,0.07)] backdrop-blur-xl sm:px-7 sm:py-8">
           <div className="flex flex-col gap-7">
-            <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+            <div className="flex flex-col gap-5">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
                   Gibko Notes
@@ -268,11 +247,6 @@ export default function App() {
                   Open. Write. Export.
                 </p>
               </div>
-
-              <ToolbarButton
-                label={theme === 'dark' ? 'Light mode' : 'Dark mode'}
-                onClick={() => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))}
-              />
             </div>
 
             <div className="flex flex-wrap gap-3">
@@ -287,10 +261,9 @@ export default function App() {
         </header>
 
         <main className="flex flex-1 flex-col gap-5 py-5 sm:gap-6 sm:py-7">
-          <section className="grid gap-3 sm:grid-cols-3">
+          <section className="grid gap-3 sm:grid-cols-2">
             <StatCard label="Words" value={metrics.words} />
             <StatCard label="Characters" value={metrics.characters} />
-            <StatCard label="Reading time" value={metrics.readingTime} />
           </section>
 
           <section className="relative flex flex-1 flex-col overflow-hidden rounded-[34px] border border-[var(--border)] bg-[var(--panel)] shadow-[0_32px_90px_rgba(15,23,42,0.09)] backdrop-blur-xl">

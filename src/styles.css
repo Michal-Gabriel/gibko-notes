@@ -26,25 +26,6 @@
     linear-gradient(180deg, #fbf8f2 0%, #f2ede5 100%);
 }
 
-:root[data-theme='dark'] {
-  color-scheme: dark;
-  --bg: #131a27;
-  --text: #f3f4f6;
-  --muted: #9aa4b2;
-  --muted-soft: #6f7b8c;
-  --panel: rgba(20, 28, 41, 0.84);
-  --border: rgba(148, 163, 184, 0.16);
-  --button: rgba(30, 41, 59, 0.64);
-  --button-hover: rgba(41, 56, 78, 0.88);
-  --button-disabled: rgba(30, 41, 59, 0.38);
-  --accent: #f2a663;
-  --placeholder: #667085;
-  background:
-    radial-gradient(circle at top left, rgba(242, 166, 99, 0.16), transparent 25%),
-    radial-gradient(circle at top right, rgba(83, 132, 160, 0.16), transparent 22%),
-    linear-gradient(180deg, #101724 0%, #131a27 100%);
-}
-
 html {
   scroll-behavior: smooth;
 }
