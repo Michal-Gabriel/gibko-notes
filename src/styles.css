@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --bg: #f7f2ea;
+  --text: #172033;
+  --muted: #6b7280;
+  --muted-soft: #9aa3b2;
+  --panel: rgba(252, 250, 245, 0.9);
+  --border: rgba(120, 113, 108, 0.18);
+  --button: rgba(255, 255, 255, 0.75);
+  --button-hover: rgba(255, 255, 255, 0.96);
+  --button-disabled: rgba(255, 255, 255, 0.45);
+  --accent: #c06a2a;
+  --placeholder: #a1a1aa;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background:
+    radial-gradient(circle at top left, rgba(247, 186, 122, 0.18), transparent 28%),
+    radial-gradient(circle at top right, rgba(180, 206, 218, 0.14), transparent 24%),
+    linear-gradient(180deg, #fbf8f2 0%, #f2ede5 100%);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #131a27;
+  --text: #f3f4f6;
+  --muted: #9aa4b2;
+  --muted-soft: #6f7b8c;
+  --panel: rgba(20, 28, 41, 0.84);
+  --border: rgba(148, 163, 184, 0.16);
+  --button: rgba(30, 41, 59, 0.64);
+  --button-hover: rgba(41, 56, 78, 0.88);
+  --button-disabled: rgba(30, 41, 59, 0.38);
+  --accent: #f2a663;
+  --placeholder: #667085;
+  background:
+    radial-gradient(circle at top left, rgba(242, 166, 99, 0.16), transparent 25%),
+    radial-gradient(circle at top right, rgba(83, 132, 160, 0.16), transparent 22%),
+    linear-gradient(180deg, #101724 0%, #131a27 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  transition:
+    background-color 300ms ease,
+    color 300ms ease;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+button,
+textarea,
+div,
+section,
+header,
+footer {
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    color 300ms ease,
+    box-shadow 300ms ease;
+}
+
+textarea::selection {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+}
